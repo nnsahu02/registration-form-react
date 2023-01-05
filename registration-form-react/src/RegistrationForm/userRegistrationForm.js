@@ -1,4 +1,5 @@
 import { useState } from "react"
+import './style.css'
 
 function UserRegistrationForm() {
 
@@ -11,26 +12,21 @@ function UserRegistrationForm() {
     const [error, setError] = useState('')
 
 
-    function handlesubmit() {
-        if (!firstName || !lastName || !gender || !country || !profilePicture) {
-            setError('All Fields are required.')
-            console.log(error)
+    function check() {
+        if (firstName && lastName && country) {
+            console.log({ firstName }, { lastName }, { country }, { marketingEmails }, { profilePicture })
         } else {
-            console.log({
-                firstName,
-                lastName,
-                gender,
-                country,
-                marketingEmails,
-                profilePicture
-            })
+            setError("All fields are required.")
+            console.log(error)
         }
     }
 
 
     return (
 
-        <form >
+        <form className="Form" onSubmit={(e) =>
+            e.preventDefault()}>
+            <h1>USER REGISTRATION FORM</h1>
             <label>
                 First Name :
                 <input type="text" value={firstName} onChange={(e) =>
@@ -47,10 +43,10 @@ function UserRegistrationForm() {
                 Gender :
                 <select value={gender} onChange={(e) =>
                     setGender(e.target.value)}>
-                    <option value="">select</option>
-                    <option value="">male</option>
-                    <option value="">female</option>
-                    <option value="">other</option>
+                    <option >select</option>
+                    <option >male</option>
+                    <option >female</option>
+                    <option >other</option>
                 </select>
             </label>
             <br />
@@ -73,7 +69,7 @@ function UserRegistrationForm() {
             </label>
             <br />
             <label>
-                <button onSubmit={handlesubmit}>Submit</button>
+                <button type="submit" onClick={check}>Submit</button>
             </label>
         </form>
 
